@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: SlotWise
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/slotwise_db
+    username: postgres
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
