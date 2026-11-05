@@ -1,15 +1,27 @@
+# SlotWise — Entity Relationship Diagram
 
+**Version:** 1.0  
+**Status:** Draft
+
+## Conceptual ER Diagram
+
+```mermaid
 erDiagram
-USER ||--o{ PROVIDER_STAFF : joins
-PROVIDER ||--o{ PROVIDER_STAFF : has_members
-PROVIDER ||--o{ PROVIDER_SERVICE : offers
-SERVICE_CATEGORY ||--o{ PROVIDER_SERVICE : classifies
-PROVIDER_STAFF ||--o{ AVAILABILITY_RULE : defines
-PROVIDER_STAFF ||--o{ AVAILABILITY_EXCEPTION : has
-USER ||--o{ APPOINTMENT : books
-PROVIDER ||--o{ APPOINTMENT : receives
-PROVIDER_SERVICE ||--o{ APPOINTMENT : selected_for
-PROVIDER_STAFF o|--o{ APPOINTMENT : assigned_to
+    USER ||--o{ PROVIDER_STAFF : joins
+    PROVIDER ||--o{ PROVIDER_STAFF : has
+    PROVIDER ||--o{ PROVIDER_SERVICE : offers
+    SERVICE_CATEGORY ||--o{ PROVIDER_SERVICE : classifies
+
+    PROVIDER_STAFF ||--o{ STAFF_SERVICE : eligible_for
+    PROVIDER_SERVICE ||--o{ STAFF_SERVICE : assigned_to
+
+    PROVIDER_STAFF ||--o{ AVAILABILITY_RULE : defines
+    PROVIDER_STAFF ||--o{ AVAILABILITY_EXCEPTION : has
+
+    USER ||--o{ APPOINTMENT : books
+    PROVIDER ||--o{ APPOINTMENT : receives
+    PROVIDER_SERVICE ||--o{ APPOINTMENT : selected_for
+    PROVIDER_STAFF ||--o{ APPOINTMENT : assigned_to
 
     USER {
         bigint id PK
@@ -21,7 +33,6 @@ PROVIDER_STAFF o|--o{ APPOINTMENT : assigned_to
         bigint id PK
         string name
         string provider_type
-        string description
         string status
     }
 
@@ -46,6 +57,12 @@ PROVIDER_STAFF o|--o{ APPOINTMENT : assigned_to
         int duration_minutes
         decimal price
         string status
+    }
+
+    STAFF_SERVICE {
+        bigint id PK
+        bigint provider_staff_id FK
+        bigint provider_service_id FK
     }
 
     AVAILABILITY_RULE {
@@ -74,3 +91,4 @@ PROVIDER_STAFF o|--o{ APPOINTMENT : assigned_to
         datetime end_at
         string status
     }
+```

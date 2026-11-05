@@ -1,94 +1,57 @@
-# SlotWise — Provider Management Requirements
+# SlotWise — Automatic Staff Assignment Requirements
 
-**Document:** Functional Requirements — Provider Management  
+**Document:** Functional Requirements — Appointment Assignment  
 **Version:** 1.0 (Draft)  
 **Status:** Proposed
 
-## 1. Provider Registration and Management
+## 1. Automatic Staff Assignment
 
-**FR-PROV-001 — Provider registration**
+**FR-ASSIGN-001 — Automatic employee assignment**
 
-The system shall allow an authenticated user to register as a service provider.
+The system shall automatically assign an eligible and available staff member when a customer books a service offered by a business provider.
 
-**FR-PROV-002 — Provider type selection**
+**FR-ASSIGN-002 — Staff-service eligibility**
 
-The system shall support two provider types:
+The system shall only consider staff members who are authorized and qualified to perform the selected service.
 
-- Individual provider
-- Business provider
+**FR-ASSIGN-003 — Availability verification**
 
-**FR-PROV-003 — Provider profile management**
+The system shall verify that the selected staff member is available for the entire requested appointment duration.
 
-The system shall allow authorized provider users to create, view and update provider profile information.
+**FR-ASSIGN-004 — Conflict prevention**
 
-**FR-PROV-004 — Provider services**
+The system shall prevent a staff member from being assigned to overlapping confirmed appointments.
 
-The system shall allow providers to create, update, activate and deactivate the services they offer.
+**FR-ASSIGN-005 — No eligible employee**
 
-Each service shall have a name, description, duration and price.
+If no eligible staff member is available for the requested time, the system shall reject the booking request and inform the customer that no suitable appointment slot is available.
 
-## 2. Staff Management
+**FR-ASSIGN-006 — Assignment persistence**
 
-**FR-STAFF-001 — Staff registration**
+The system shall store the assigned staff member against the appointment record.
 
-The system shall allow an authorized business owner or administrator to add staff members to a business provider.
+**FR-ASSIGN-007 — Assignment consistency**
 
-**FR-STAFF-002 — Staff association**
+The system shall ensure that staff assignment and appointment confirmation are performed consistently. A failed assignment shall not result in an incorrectly confirmed appointment.
 
-The system shall associate each staff member with a provider account.
+## 2. Individual Provider Assignment
 
-**FR-STAFF-003 — Staff availability**
+**FR-ASSIGN-008 — Individual provider scheduling**
 
-The system shall allow authorized users to define and manage the availability of bookable staff members.
+For an individual provider, the system shall treat the individual professional as the bookable staff member.
 
-**FR-STAFF-004 — Staff permissions**
+The same availability and appointment conflict rules shall apply to individual providers and business employees.
 
-The system shall restrict staff management operations according to the user's permissions within the provider account.
+## 3. Appointment Assignment Constraints
 
-**FR-STAFF-005 — Individual provider representation**
+**FR-ASSIGN-009**
 
-An individual provider shall be represented by a provider account with its owner associated as a bookable provider staff member.
+The system shall consider staff working schedules, availability exceptions, existing appointments and service eligibility when selecting an employee.
 
-## 3. Appointment Management
+**FR-ASSIGN-010**
 
-**FR-BOOK-001 — Appointment booking**
-
-The system shall allow customers to book an appointment with an individual provider or a business provider.
-
-**FR-BOOK-002 — Staff assignment**
-
-The system shall support assigning an appointment to an eligible staff member.
-
-**FR-BOOK-003 — Availability validation**
-
-The system shall validate provider staff availability before confirming an appointment.
-
-**FR-BOOK-004 — Booking conflict prevention**
-
-The system shall prevent overlapping confirmed appointments for the same bookable staff member.
-
-**FR-BOOK-005 — Appointment lifecycle**
-
-The system shall support appointment statuses, including pending, confirmed, cancelled and completed. Additional statuses may be defined during detailed requirements analysis.
-
-## 4. Authorization and Access Control
-
-**FR-AUTH-001**
-
-The system shall distinguish platform-level roles from provider-level permissions.
-
-**FR-AUTH-002**
-
-Only authorized provider owners and administrators shall be allowed to manage provider profiles and staff membership.
-
-**FR-AUTH-003**
-
-Staff members shall only be able to access operations permitted by their provider-level permissions.
-
-**FR-AUTH-004**
-
-Customers shall only be able to manage their own appointments, subject to the defined business rules.
+The system shall support a configurable assignment strategy. The initial assignment strategy shall be defined during system design.
 
 ---
 
-*Note: These are proposed functional requirements. Their acceptance criteria, priorities and detailed business rules will be refined before implementation.*
+*These requirements are proposed and will be refined with acceptance criteria during detailed requirements analysis.*
